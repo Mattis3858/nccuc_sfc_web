@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "國立政治大學商學院永續財務決策研究中心",
   description: "NCCU Commerce Sustainable Finance Center 國立政治大學商學院永續財務決策研究中心",
+  icons: {
+    icon: "/sfc_logo.png",
+  },
 };
 
 export default function RootLayout({ children }) {

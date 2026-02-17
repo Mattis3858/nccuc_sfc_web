@@ -1,12 +1,51 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Header() {
   const navItems = [
-    { label: "關於我們", href: "#about" },
-    { label: "最新消息", href: "#news" },
-    { label: "永續財務資訊", href: "#information" },
-    { label: "中心研究成果", href: "#research" },
-    { label: "永續財務相關連結", href: "#links" },
+    {
+      label: "關於我們",
+      items: [
+        { label: "中心介紹", href: "/about/center" },
+        { label: "主任介紹", href: "/about/director" },
+        { label: "團隊介紹", href: "/about/team" },
+        { label: "聯絡我們", href: "/about/contact" },
+      ],
+    },
+    {
+      label: "最新消息",
+      items: [
+        { label: "相關活動", href: "#news-events" },
+      ],
+    },
+    {
+      label: "永續財務資訊",
+      items: [
+        { label: "永續金融", href: "#info-sustainable-finance" },
+        { label: "永續財務", href: "#info-sustainable-accounting" },
+        { label: "新知(新聞、報導)", href: "#info-news" },
+      ],
+    },
+    {
+      label: "中心研究成果",
+      items: [
+        { label: "永續財務研究", href: "#research-studies" },
+        { label: "永續財務決策方案", href: "#research-solutions" },
+      ],
+    },
+    {
+      label: "永續財務相關連結",
+      items: [
+        { label: "永續財務相關法規", href: "#links-regulation" },
+        { label: "ESG接軌IFRS永續揭露準則", href: "#links-esg-ifrs" },
+        { label: "金融監督管理委員會", href: "#links-fsc" },
+        { label: "證券櫃檯買賣中心", href: "#links-otc" },
+        { label: "台灣證券交易所", href: "#links-twse" },
+        { label: "台灣期貨交易所", href: "#links-taifex" },
+        { label: "台灣期中保管結算所", href: "#links-tdcc" },
+        { label: "財團法人會計研究發展基金會環境部", href: "#links-aicpa-env" },
+      ],
+    },
   ];
 
   return (
@@ -23,27 +62,51 @@ export default function Header() {
               priority
             />
           </div>
-          <div className="flex flex-col gap-1">
-            <h1 className="text-xl font-bold text-gray-800" style={{ fontFamily: "'KaiTi', '標楷體', serif" }}>
-              國立政治大學商學院永續財務決策研究中心
-            </h1>
-            <p className="text-sm text-gray-600" style={{ fontFamily: "'Times New Roman', Times, serif" }}>
-              NCCUC Sustainable Finance Center
-            </p>
-          </div>
-        </div>
-
-        {/* 右側：導航菜單 */}
-        <nav className="flex gap-8 items-center">
-          {navItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              className="text-base text-gray-700 no-underline transition-colors duration-300 hover:text-green-600 hover:font-semibold whitespace-nowrap"
+          <Link href="/" className="flex flex-col gap-1">
+            <h1
+              className="text-xl font-bold text-gray-800"
               style={{ fontFamily: "'KaiTi', '標楷體', serif" }}
             >
-              {item.label}
-            </a>
+              國立政治大學商學院永續財務決策研究中心
+            </h1>
+            <p
+              className="text-sm text-gray-600"
+              style={{ fontFamily: "'Times New Roman', Times, serif" }}
+            >
+              NCCUC Sustainable Finance Center
+            </p>
+          </Link>
+        </div>
+
+        {/* 右側：導航菜單（含下拉） */}
+        <nav className="flex gap-8 items-center">
+          {navItems.map((item) => (
+            <div
+              key={item.label}
+              className="relative group"
+              style={{ fontFamily: "'KaiTi', '標楷體', serif" }}
+            >
+              {/* 主選單文字 */}
+              <button
+                type="button"
+                className="text-base text-gray-700 no-underline transition-colors duration-300 hover:text-blue-800 hover:font-semibold whitespace-nowrap focus:outline-none"
+              >
+                {item.label}
+              </button>
+
+              {/* 下拉選單 */}
+              <div className="absolute left-1/2 -translate-x-1/2 top-full min-w-max bg-white border border-gray-200 shadow-lg rounded-md py-2 z-50 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-200">
+                {item.items.map((subItem) => (
+                  <a
+                    key={subItem.label}
+                    href={subItem.href}
+                    className="block px-4 py-2 text-sm text-gray-700 whitespace-nowrap hover:bg-blue-50 hover:text-blue-800"
+                  >
+                    {subItem.label}
+                  </a>
+                ))}
+              </div>
+            </div>
           ))}
         </nav>
       </div>
